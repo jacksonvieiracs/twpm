@@ -13,16 +13,34 @@ class LinkedList:
         self.count = 0
         self.head: Node | None = None
 
-    def push(self, element: int):
+    def append(self, element: int):
         node = Node(element=element)
-        if self.head is None:
+        if self.count == 0:
             self.head = node
         else:
-            head = self.head
-            node.next = head
-            self.head = node
-
+            last = self[self.count - 1]
+            last.next = node
         self.count += 1
+
+    def pop(self, index: int) -> Node | None:
+        if index < 0 or index > self.count:
+            raise IndexError("Index out of range")
+
+        current = self.head
+
+        if index == 0:
+            self.head = current.next
+        else:
+            previous = None
+            for _ in range(index):
+                previous = current
+                current = current.next
+
+            previous.next = current.next
+
+        self.count -= 1
+
+        return current
 
     def insert(self, index: int, element: int):
         if index < 0 or index > self.count:
@@ -49,7 +67,7 @@ class LinkedList:
         return self.count
 
     def __getitem__(self, index: int) -> Node | None:
-        if index < 0 or index >= self.count:
+        if index < 0 or index > self.count:
             raise IndexError("Index out of range")
 
         node = self.head

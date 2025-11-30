@@ -7,18 +7,35 @@ from midnight.dsa.linkedlist import LinkedList
 class TestLinkedList:
     def test_get_existent_element(self):
         linked_list = LinkedList()
-        linked_list.push(10)
-        linked_list.push(15)
-        assert linked_list[1].element == 10
+        linked_list.append(10)
+        linked_list.append(15)
+        assert linked_list[0].element == 10
 
-    # def test_insert_with_empty_list_should_grow_with_default_values(self):
-    #     linked_list = LinkedList()
-    #
-    #     assert len(linked_list) == 0
-    #     linked_list.insert(5, 10)
-    #
-    #     assert len(linked_list) == 6
-    #     assert linked_list[5].element == 10
+    def test_pop_at_head_position(self):
+        linked_list = LinkedList()
+
+        assert len(linked_list) == 0
+        linked_list.insert(0, 10)
+
+        assert len(linked_list) == 1
+        linked_list.pop(0)
+
+        assert len(linked_list) == 0
+
+    def test_pop_last_element(self):
+        linked_list = LinkedList()
+
+        assert len(linked_list) == 0
+
+        linked_list.append(10)
+        linked_list.append(30)
+        linked_list.append(20)
+
+        assert len(linked_list) == 3
+        linked_list.pop(2)
+
+        assert len(linked_list) == 2
+        assert linked_list[1].element == 30
 
     def test_insert_at_head_position(self):
         linked_list = LinkedList()
@@ -29,9 +46,18 @@ class TestLinkedList:
         assert len(linked_list) == 1
         assert linked_list[0].element == 10
 
+    # def test_insert_with_empty_list_should_grow_with_default_values(self):
+    #     linked_list = LinkedList()
+    #
+    #     assert len(linked_list) == 0
+    #     linked_list.insert(5, 10)
+    #
+    #     assert len(linked_list) == 6
+    #     assert linked_list[5].element == 10
+
     def test_is_empty_linkedlist_bool(self):
         linked_list = LinkedList()
         assert not linked_list
 
-        linked_list.push(20)
+        linked_list.append(20)
         assert linked_list
