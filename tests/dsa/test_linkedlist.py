@@ -25,3 +25,10 @@ class TestLinkedList:
 
         assert len(linked_list) == 6
         assert linked_list[5] == 10
+
+    def test_is_empty_linkedlist_bool(self):
+        linked_list = LinkedList()
+        assert not linked_list
+
+        linked_list.push(20)
+        assert linked_list

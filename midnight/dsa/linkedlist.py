@@ -32,6 +32,9 @@ class LinkedList:
 
         return current.element
 
+    def __bool__(self):
+        return self.count > 0
+
     def push(self, element: int):
         node = Node(element=element)
         if self.head is None:
