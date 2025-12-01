@@ -17,7 +17,7 @@
 - [X] Append
 - [X] Remove by index (pop)
 - [X] Atribution (= replace)
-- [ ] Extend
+- [X] Extend
 - [ ] Insert growing the list if index > len(list)
 - [X] Clear
 
