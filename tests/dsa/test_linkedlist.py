@@ -61,3 +61,13 @@ class TestLinkedList:
 
         linked_list.append(20)
         assert linked_list
+
+    def test_clear_should_reset_head(self):
+        linked_list = LinkedList()
+        linked_list.append(20)
+
+        assert len(linked_list) == 1
+        linked_list.clear()
+
+        assert len(linked_list) == 0
+        assert linked_list.head == None

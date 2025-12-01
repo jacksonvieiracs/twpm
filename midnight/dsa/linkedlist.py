@@ -22,17 +22,19 @@ class LinkedList:
             last.next = node
         self.count += 1
 
-    def pop(self, index: int) -> Node | None:
-        if index < 0 or index > self.count:
+    def pop(self, index: int) -> Node:
+        abs_index = abs(index)
+
+        if abs_index >= self.count and index != 0:
             raise IndexError("Index out of range")
 
         current = self.head
 
-        if index == 0:
+        if abs_index == 0:
             self.head = current.next
         else:
             previous = None
-            for _ in range(index):
+            for _ in range(abs_index):
                 previous = current
                 current = current.next
 
@@ -43,22 +45,28 @@ class LinkedList:
         return current
 
     def insert(self, index: int, element: int):
-        if index < 0 or index > self.count:
+        abs_index = abs(index)
+
+        if abs_index >= self.count and index != 0:
             raise IndexError("Index out of range")
 
         node = Node(element=element)
 
-        if index == 0:
+        if abs_index == 0:
             current = self.head
             node.next = current
             self.head = node
         else:
-            previous = self[index - 1]
+            previous = self[abs_index - 1]
             current = previous.next
             previous.next = node
             node.next = current
 
         self.count += 1
+
+    def clear(self):
+        self.head = None
+        self.count = 0
 
     def __bool__(self):
         return self.count > 0
@@ -68,25 +76,28 @@ class LinkedList:
 
     def __setitem__(self, index: int, node: Node):
         "replace the item in the index with the given node"
-        if index < 0 or index > self.count:
+        abs_index = abs(index)
+        if abs_index >= self.count and index != 0:
             raise IndexError("Index out of range")
 
         current = self.head
 
-        if index == 0:
+        if abs_index == 0:
             node.next = current.next
             self.head = node
         else:
             previous = None
-            for _ in range(index):
+            for _ in range(abs_index):
                 previous = current
                 current = current.next
 
             node.next = current.next
             previous.next = node
 
-    def __getitem__(self, index: int) -> Node | None:
-        if index < 0 or index > self.count:
+    def __getitem__(self, index: int) -> Node:
+        abs_index = abs(index)
+
+        if abs_index >= self.count and index != 0:
             raise IndexError("Index out of range")
 
         node = self.head
