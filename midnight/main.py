@@ -14,24 +14,7 @@ class NodeStorage:
         self.nodes[key] = data
 
 
-@dataclass
-class NodeResult:
-    success: bool
-    data: dict[str, str]
-    message: str
-
-
 success_result = NodeResult(success=True, data={}, message="")
-
-
-class Node(ABC):
-    next: Self | None = None
-
-    @abstractmethod
-    async def execute(self) -> NodeResult: ...
-
-    def set_next(self, next: Self):
-        self.next = next
 
 
 class ActionNode(Node):
