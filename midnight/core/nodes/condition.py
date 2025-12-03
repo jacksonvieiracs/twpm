@@ -1,9 +1,9 @@
 from typing import Callable, override
-from midnight.core.interfaces.node import Node, NodeResult
+from midnight.core.interfaces.node import ListData, Node, NodeResult
 
 from midnight.core.cursor import Cursor
 
-ConditionalFunc = Callable[[], bool]
+ConditionalFunc = Callable[[ListData], bool]
 
 
 class ConditionalNode(Node):
@@ -14,11 +14,11 @@ class ConditionalNode(Node):
         super().__init__()
 
     @override
-    async def execute(self) -> NodeResult:
+    async def execute(self, data: ListData) -> NodeResult:
         if self.condition_func is None:
             raise ValueError("Condition function is not set.")
 
-        if self.condition_func():
+        if self.condition_func(data):
             next_node = self.true_node
         else:
             next_node = self.false_node
