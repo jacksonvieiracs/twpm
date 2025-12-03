@@ -1,4 +1,4 @@
-from .interfaces.node import Node
+from midnight.core.base import Node
 
 
 class Cursor:

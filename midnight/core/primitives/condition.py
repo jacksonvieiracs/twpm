@@ -1,6 +1,7 @@
 from typing import Callable, override
-from midnight.core.interfaces.node import ListData, Node, NodeResult
 
+from midnight.core.base import ListData, Node, NodeResult
+from midnight.core.decorators import safe_execute
 from midnight.core.cursor import Cursor
 
 ConditionalFunc = Callable[[ListData], bool]
@@ -14,6 +15,7 @@ class ConditionalNode(Node):
         super().__init__()
 
     @override
+    @safe_execute()
     async def execute(self, data: ListData) -> NodeResult:
         if self.condition_func is None:
             raise ValueError("Condition function is not set.")

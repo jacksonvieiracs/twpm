@@ -1,6 +1,8 @@
 from collections.abc import Awaitable
 from typing import Callable, override
-from midnight.core.interfaces.node import ListData, Node, NodeResult
+
+from midnight.core.base import ListData, Node, NodeResult
+from midnight.core.decorators import safe_execute
 
 AsyncTaskFunc = Callable[[ListData], Awaitable[bool]]
 
@@ -11,6 +13,7 @@ class TaskNode(Node):
         super().__init__()
 
     @override
+    @safe_execute()
     async def execute(self, data: ListData) -> NodeResult:
         success = await self.async_task_func(data)
         result = NodeResult(success=success, data={}, message="")
