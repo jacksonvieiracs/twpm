@@ -75,14 +75,14 @@ class TestConditionalNode:
 
         # Test with matching value
         data_match = ListData(data={"check_value": "expected"})
-        result = await cond_node.execute(data_match)
+        _ = await cond_node.execute(data_match)
         assert cond_node.next == true_node
 
         # Test with non-matching value
         cond_node2 = ConditionalNode()
         cond_node2.set_condition(data_condition, true_node, false_node)
         data_no_match = ListData(data={"check_value": "other"})
-        result2 = await cond_node2.execute(data_no_match)
+        _ = await cond_node2.execute(data_no_match)
         assert cond_node2.next == false_node
 
     async def test_conditional_node_without_condition_raises_error(self):
@@ -188,14 +188,14 @@ class TestConditionalNode:
 
         # Test true case
         data_true = ListData(data={"a": "10", "b": "5"})
-        result_true = await cond_node.execute(data_true)
+        _ = await cond_node.execute(data_true)
         assert cond_node.next == true_node
 
         # Test false case
         cond_node2 = ConditionalNode()
         cond_node2.set_condition(complex_condition, true_node, false_node)
         data_false = ListData(data={"a": "3", "b": "8"})
-        result_false = await cond_node2.execute(data_false)
+        _ = await cond_node2.execute(data_false)
         assert cond_node2.next == false_node
 
     async def test_conditional_node_chaining(self):

@@ -18,6 +18,7 @@ class NodeStatus(Enum):
         FAILED: Node execution failed
         AWAITING_INPUT: Node is paused waiting for external input
     """
+
     DEFAULT = "default"
     COMPLETE = "complete"
     FAILED = "failed"

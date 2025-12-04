@@ -1,4 +1,5 @@
 import logging
+
 from midnight.core.base import ListData, Node, NodeResult, NodeStatus
 
 logger = logging.getLogger(__name__)
@@ -55,7 +56,7 @@ class Orchestrator:
             raise RuntimeError("Orchestrator must be started before processing")
 
         self.logger.info("Starting process execution")
-        
+
         if input is not None:
             self._data["_user_input"] = input
             self.logger.debug(f"User input received: {input}")

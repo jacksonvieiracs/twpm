@@ -7,9 +7,9 @@ The Node class provides the basic structure for nodes in a linked list-based wor
 
 from abc import ABC, abstractmethod
 
-from midnight.core.base.types import NodeKey
 from midnight.core.base.enums import NodeStatus
 from midnight.core.base.models import ListData, NodeResult
+from midnight.core.base.types import NodeKey
 
 
 class Node(ABC):
@@ -30,8 +30,8 @@ class Node(ABC):
     def __init__(self) -> None:
         """Initialize a new node with default values."""
         self.key: NodeKey
-        self.next: "Node | None" = None
-        self.previous: "Node | None" = None
+        self.next: Node | None = None
+        self.previous: Node | None = None
         self.status: NodeStatus = NodeStatus.DEFAULT
 
     @abstractmethod

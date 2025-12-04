@@ -1,4 +1,5 @@
 import pytest
+
 from midnight.dsa.doublelinkedlist import DoubleLinkedList
 
 

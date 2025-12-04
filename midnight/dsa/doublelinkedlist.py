@@ -1,5 +1,6 @@
-from .linkedlist import LinkedList, Node
 from dataclasses import dataclass
+
+from .linkedlist import LinkedList
 
 
 @dataclass

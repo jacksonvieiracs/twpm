@@ -1,6 +1,7 @@
 import logging
 from functools import wraps
 from typing import Callable
+
 from midnight.core.base import ListData, NodeResult
 
 
@@ -46,7 +47,7 @@ def safe_execute(logger: logging.Logger | None = None):
                 return NodeResult(
                     success=False,
                     data={},
-                    message=f"Exception in node '{node_id}': {str(e)}",
+                    message=f"Exception in node '{node_id}': {e!s}",
                     is_awaiting_input=False,
                 )
 

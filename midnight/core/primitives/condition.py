@@ -1,8 +1,8 @@
 from typing import Callable, override
 
 from midnight.core.base import ListData, Node, NodeResult
-from midnight.core.decorators import safe_execute
 from midnight.core.cursor import Cursor
+from midnight.core.decorators import safe_execute
 
 ConditionalFunc = Callable[[ListData], bool]
 

@@ -1,9 +1,10 @@
 import logging
+
 import pytest
 
-from midnight.core.orchestrator import Orchestrator
 from midnight.core.base import ListData, Node, NodeResult, NodeStatus
 from midnight.core.decorators import safe_execute
+from midnight.core.orchestrator import Orchestrator
 
 
 class MockNode(Node):

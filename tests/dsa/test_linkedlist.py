@@ -1,4 +1,5 @@
 import pytest
+
 from midnight.dsa.linkedlist import LinkedList, Node
 
 
@@ -95,7 +96,8 @@ class TestLinkedList:
     def test_insert_after_with_empty_list(self):
         """Should
         Case 1: index > len or length == 0 (5 > 0 or length == 0)
-        Should raise a IndexError because the element cannot be inserted after an index that does not exist
+        Should raise a IndexError because the element cannot be inserted after an index
+        that does not exist
         """
         linked_list = LinkedList()
         with pytest.raises(IndexError):

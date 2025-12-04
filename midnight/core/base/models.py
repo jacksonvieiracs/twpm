@@ -6,6 +6,7 @@ between nodes and managing workflow state.
 """
 
 from dataclasses import dataclass
+
 from midnight.core.base.types import NodeKey, Value
 
 
