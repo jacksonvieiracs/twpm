@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Midnight is a workflow builder library that simplifies creating dynamic workflows using a linked-list-based execution model. The project combines data structure implementations (for learning) with a workflow orchestration system.
+twpm is a workflow builder library that simplifies creating dynamic workflows using a linked-list-based execution model. The project combines data structure implementations (for learning) with a workflow orchestration system.
 
 ## Common Development Commands
 
@@ -60,7 +60,7 @@ uv build --wheel
 
 ## Architecture
 
-### Core Workflow System (`midnight/core/`)
+### Core Workflow System (`twpm/core/`)
 
 The workflow system is built on a linked-list architecture where nodes execute sequentially:
 
@@ -97,7 +97,7 @@ The workflow system is built on a linked-list architecture where nodes execute s
    - `Cursor.insert(target, new_node)`: Inserts new_node after target
    - Used by ConditionalNode to dynamically modify workflow structure
 
-### Data Structures (`midnight/dsa/`)
+### Data Structures (`twpm/dsa/`)
 
 Contains learning implementations:
 - `linkedlist.py`: Singly-linked list implementation

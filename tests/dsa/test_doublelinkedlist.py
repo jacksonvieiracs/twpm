@@ -1,6 +1,6 @@
 import pytest
 
-from midnight.dsa.doublelinkedlist import DoubleLinkedList
+from twpm.dsa.doublelinkedlist import DoubleLinkedList
 
 
 class TestDoubleLinkedList:

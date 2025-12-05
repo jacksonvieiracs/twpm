@@ -7,7 +7,7 @@ between nodes and managing workflow state.
 
 from dataclasses import dataclass
 
-from midnight.core.base.types import NodeKey, Value
+from twpm.core.base.types import NodeKey, Value
 
 
 @dataclass

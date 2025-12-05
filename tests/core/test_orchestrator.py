@@ -2,11 +2,11 @@ import logging
 
 import pytest
 
-from midnight.core.base import ListData, Node, NodeResult, NodeStatus
-from midnight.core.container import Container, ServiceScope
-from midnight.core.decorators import safe_execute
-from midnight.core.depedencies import Output
-from midnight.core.orchestrator import Orchestrator
+from twpm.core.base import ListData, Node, NodeResult, NodeStatus
+from twpm.core.container import Container, ServiceScope
+from twpm.core.decorators import safe_execute
+from twpm.core.depedencies import Output
+from twpm.core.orchestrator import Orchestrator
 
 
 class MockNode(Node):

@@ -1,7 +1,7 @@
 import pytest
 from nodes import ProgressNode
 
-from midnight.core.base.models import ListData
+from twpm.core.base.models import ListData
 
 
 @pytest.mark.asyncio

@@ -1,8 +1,8 @@
 import pytest
 
-from midnight.core.base import ListData, NodeResult, NodeStatus
-from midnight.core.primitives.condition import ConditionalNode
-from midnight.core.primitives.task import TaskNode
+from twpm.core.base import ListData, NodeResult, NodeStatus
+from twpm.core.primitives.condition import ConditionalNode
+from twpm.core.primitives.task import TaskNode
 
 
 @pytest.mark.asyncio

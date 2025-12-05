@@ -1,7 +1,7 @@
 import pytest
 
-from midnight.core.base import ListData, Node, NodeResult
-from midnight.core.chain import Chain, chain
+from twpm.core.base import ListData, Node, NodeResult
+from twpm.core.chain import Chain, chain
 
 
 class DummyNode(Node):

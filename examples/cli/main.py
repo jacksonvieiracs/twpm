@@ -2,10 +2,10 @@ import asyncio
 
 from nodes import DisplayMessageNode, PoolNode, QuestionNode, SummaryNode
 
-from midnight.core import Chain, Orchestrator
-from midnight.core.base.node import Node
-from midnight.core.container import Container, ServiceScope
-from midnight.core.depedencies import Output
+from twpm.core import Chain, Orchestrator
+from twpm.core.base.node import Node
+from twpm.core.container import Container, ServiceScope
+from twpm.core.depedencies import Output
 
 
 def create_chain() -> Node:

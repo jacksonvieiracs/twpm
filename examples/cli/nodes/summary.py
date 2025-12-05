@@ -1,7 +1,7 @@
 from typing import override
 
-from midnight.core.base import ListData, Node, NodeResult
-from midnight.core.decorators import safe_execute
+from twpm.core.base import ListData, Node, NodeResult
+from twpm.core.decorators import safe_execute
 
 
 class SummaryNode(Node):

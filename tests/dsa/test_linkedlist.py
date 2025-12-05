@@ -1,6 +1,6 @@
 import pytest
 
-from midnight.dsa.linkedlist import LinkedList, Node
+from twpm.dsa.linkedlist import LinkedList, Node
 
 
 class TestLinkedList:

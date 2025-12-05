@@ -1,7 +1,7 @@
 import pytest
 from nodes import DisplayMessageNode, PoolNode, QuestionNode
 
-from midnight.core.orchestrator import Orchestrator
+from twpm.core.orchestrator import Orchestrator
 
 
 @pytest.mark.asyncio

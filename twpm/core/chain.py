@@ -7,8 +7,8 @@ requiring knowledge of doubly linked list structures.
 
 from collections.abc import Callable
 
-from midnight.core.base import Node
-from midnight.core.cursor import Cursor
+from twpm.core.base import Node
+from twpm.core.cursor import Cursor
 
 
 class Chain:
@@ -217,7 +217,7 @@ class Chain:
         custom_factory = config["node_factory"]
 
         # Import here to avoid circular dependency
-        from midnight.core.primitives.task import TaskNode
+        from twpm.core.primitives.task import TaskNode
 
         # Determine filter function
         if after_each is None:

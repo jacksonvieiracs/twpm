@@ -1,7 +1,7 @@
 import pytest
 from nodes import PoolNode
 
-from midnight.core.base.models import ListData
+from twpm.core.base.models import ListData
 
 
 @pytest.mark.asyncio

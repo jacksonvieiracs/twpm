@@ -1,6 +1,6 @@
 from collections.abc import Callable
 
-from midnight.core.base import Node
+from twpm.core.base import Node
 
 
 class Cursor:

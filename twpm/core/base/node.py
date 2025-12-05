@@ -7,9 +7,9 @@ The Node class provides the basic structure for nodes in a linked list-based wor
 
 from abc import ABC, abstractmethod
 
-from midnight.core.base.enums import NodeStatus
-from midnight.core.base.models import ListData, NodeResult
-from midnight.core.base.types import NodeKey
+from twpm.core.base.enums import NodeStatus
+from twpm.core.base.models import ListData, NodeResult
+from twpm.core.base.types import NodeKey
 
 
 class Node(ABC):

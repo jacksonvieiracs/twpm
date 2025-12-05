@@ -2,7 +2,7 @@ import logging
 from functools import wraps
 from typing import Callable
 
-from midnight.core.base import NodeResult
+from twpm.core.base import NodeResult
 
 
 def safe_execute(logger: logging.Logger | None = None):
@@ -32,7 +32,7 @@ def safe_execute(logger: logging.Logger | None = None):
         @wraps(func)
         async def wrapper(self, *args, **kwargs) -> "NodeResult":
             # fix circular dependency
-            from midnight.core.base import NodeResult
+            from twpm.core.base import NodeResult
 
             node_logger = logger or logging.getLogger(__name__)
             node_id = getattr(self, "key", self.__class__.__name__)

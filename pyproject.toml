@@ -33,9 +33,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jacksonvieiracs/midnight"
-Repository = "https://github.com/jacksonvieiracs/midnight"
-Issues = "https://github.com/jacksonvieiracs/midnight/issues"
+Homepage = "https://github.com/jacksonvieiracs/twpm"
+Repository = "https://github.com/jacksonvieiracs/twpm"
+Issues = "https://github.com/jacksonvieiracs/twpm/issues"
 
 [build-system]
 requires = ["hatchling"]

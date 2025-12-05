@@ -3,9 +3,9 @@ import inspect
 import logging
 from typing import Any
 
-from midnight.core.base import ListData, Node, NodeResult, NodeStatus
-from midnight.core.container import Container
-from midnight.core.depedencies import Output
+from twpm.core.base import ListData, Node, NodeResult, NodeStatus
+from twpm.core.container import Container
+from twpm.core.depedencies import Output
 
 logger = logging.getLogger(__name__)
 

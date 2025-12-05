@@ -1,8 +1,8 @@
 from collections.abc import Awaitable
 from typing import Callable, override
 
-from midnight.core.base import ListData, Node, NodeResult
-from midnight.core.decorators import safe_execute
+from twpm.core.base import ListData, Node, NodeResult
+from twpm.core.decorators import safe_execute
 
 AsyncTaskFunc = Callable[[ListData], Awaitable[bool]]
 

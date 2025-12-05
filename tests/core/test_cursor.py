@@ -1,7 +1,7 @@
 import pytest
 
-from midnight.core.base import ListData, Node, NodeResult
-from midnight.core.cursor import Cursor
+from twpm.core.base import ListData, Node, NodeResult
+from twpm.core.cursor import Cursor
 
 
 class DummyNode(Node):
