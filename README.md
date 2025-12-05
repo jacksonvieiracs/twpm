@@ -5,7 +5,7 @@ A simple workflow builder that takes the complexity out of building dynamic work
 ## Installation
 
 ```sh
-uv add 12am
+uv add twpm
 ``` 
 
 ## Usages

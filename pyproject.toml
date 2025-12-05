@@ -1,5 +1,5 @@
 [project]
-name = "midnight"
+name = "twpm"
 version = "0.1.0"
 description = "A simple workflow builder that takes the complexity out of building dynamic workflows"
 readme = "README.md"
@@ -71,4 +71,4 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 
 [tool.hatch.build.targets.wheel]
-packages = ["midnight"]
+packages = ["twpm"]
