@@ -1,5 +1,6 @@
 import inspect
 import logging
+from enum import Enum, auto
 from typing import Any
 
 from twpm.core.base import ListData, Node, NodeResult, NodeStatus
@@ -9,41 +10,58 @@ from twpm.core.depedencies import Output
 logger = logging.getLogger(__name__)
 
 
+class OrchestratorState(Enum):
+    DEFAULT = auto()
+    STARTED = auto()
+    FINISHED = auto()
+    ERROR = auto()
+
+
 class Orchestrator:
     def __init__(
         self, container: Container, logger: logging.Logger | None = None
     ) -> None:
-        self.__head: Node | None = None
-        self.__current: Node | None = None
+        self._head: Node | None = None
+        self._current: Node | None = None
         self._data: ListData = ListData(data={})
-        self.__started = False
-        self.__ended = False
+        self._state: OrchestratorState = OrchestratorState.DEFAULT
+
+        self._session_id: str | None = None
 
         self.container = container
         self.logger = logger or logging.getLogger(__name__)
 
     @property
-    def is_ended(self) -> bool:
-        return self.__ended
+    def is_finished(self) -> bool:
+        return self._state == OrchestratorState.FINISHED
+
+    @property
+    def is_started(self) -> bool:
+        return self._state == OrchestratorState.STARTED
 
     @property
     def current_node(self) -> Node | None:
         """Get the current node being processed."""
-        return self.__current
+        return self._current
 
-    def start(self, start_node: Node):
+    @property
+    def session_id(self) -> str | None:
+        return self._session_id
+
+    def start(self, session_id: str, start_node: Node):
         """Initialize and start the orchestrator with a starting node."""
-        self.__started = True
-        self.__head = start_node
-        self.__current = start_node
+        self._state = OrchestratorState.STARTED
+        self._session_id = session_id
+        self._head = start_node
+        self._current = start_node
         self.logger.info(
             f"Orchestrator started with node: {self._get_node_identifier(start_node)}"
         )
 
     def reset(self):
         """Reset the orchestrator to the beginning of the workflow."""
-        self.__ended = False
-        self.__current = self.__head
+        self._state = OrchestratorState.DEFAULT
+        self._current = self._head
         self.logger.info("Orchestrator reset to head node")
 
     def inject(self, node: Node) -> dict[str, Any]:
@@ -79,7 +97,7 @@ class Orchestrator:
         Note: Exceptions in nodes are handled by the @safe_execute decorator,
         so this method will never receive exceptions from node.execute().
         """
-        if not self.__started:
+        if not self.is_started:
             self.logger.error("Cannot process: orchestrator not started")
             raise RuntimeError("Orchestrator must be started before processing")
 
@@ -89,10 +107,10 @@ class Orchestrator:
             self._data["_user_input"] = input
             self.logger.debug(f"User input received: {input}")
 
-        while self.__current is not None:
-            node_id = self._get_node_identifier(self.__current)
+        while self._current is not None:
+            node_id = self._get_node_identifier(self._current)
 
-            result = await self._execute_node(self.__current)
+            result = await self._execute_node(self._current)
 
             if not self._handle_node_result(result, node_id):
                 return
@@ -120,11 +138,11 @@ class Orchestrator:
         Handle the result of a node execution.
         Returns True to continue processing, False to stop.
         """
-        assert self.__current is not None, "Current is None"
+        assert self._current is not None, "Current is None"
 
         if result.is_awaiting_input:
             self.logger.info(f"Node {node_id} is awaiting input: {result.message}")
-            self.__current.status = NodeStatus.AWAITING_INPUT
+            self._current.status = NodeStatus.AWAITING_INPUT
             if result.data:
                 self._merge_result_data(result.data)
                 self.logger.debug(f"Merged data from node {node_id}: {result.data}")
@@ -132,7 +150,7 @@ class Orchestrator:
 
         if not result.success:
             self.logger.warning(f"Node {node_id} failed: {result.message}")
-            self.__current.status = NodeStatus.FAILED
+            self._current.status = NodeStatus.FAILED
             self._end_workflow(f"Node {node_id} failed")
             return False
 
@@ -140,11 +158,11 @@ class Orchestrator:
             self._merge_result_data(result.data)
             self.logger.debug(f"Merged data from node {node_id}: {result.data}")
 
-        self.__current.status = NodeStatus.COMPLETE
-        self.__current = self.__current.next
+        self._current.status = NodeStatus.COMPLETE
+        self._current = self._current.next
 
-        if self.__current:
-            next_id = self._get_node_identifier(self.__current)
+        if self._current:
+            next_id = self._get_node_identifier(self._current)
             self.logger.debug(f"Moving to next node: {next_id}")
 
         return True
@@ -155,7 +173,7 @@ class Orchestrator:
 
     def _end_workflow(self, reason: str) -> None:
         """Mark the workflow as ended and log the reason."""
-        self.__ended = True
+        self._state = OrchestratorState.FINISHED
         self.logger.info(f"Workflow ended: {reason}")
 
     def _get_node_identifier(self, node: Node) -> str:

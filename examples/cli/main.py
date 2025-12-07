@@ -169,7 +169,7 @@ async def main():
 
     await orchestrator.process()
 
-    while not orchestrator.is_ended:
+    while not orchestrator.is_finished:
         user_input = await asyncio.to_thread(input, ">> ")
         user_input = user_input.strip()
         await orchestrator.process(input=user_input)
