@@ -71,11 +71,7 @@ class Orchestrator:
         Returns:
             Dictionary of parameter names to injected values
         """
-        # Get the original function signature, unwrapping decorators if necessary
         execute_method = node.execute
-        if hasattr(execute_method, "__wrapped__"):
-            execute_method = execute_method.__wrapped__
-
         func_signature = inspect.signature(execute_method)
         kwargs: dict[str, Any] = {}
 

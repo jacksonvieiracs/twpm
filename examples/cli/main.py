@@ -165,7 +165,7 @@ async def main():
     container = Container()
     container.register(Output, lambda: ConsoleOutput(), ServiceScope.SINGLETON)
     orchestrator = Orchestrator(container)
-    orchestrator.start(chain)
+    orchestrator.start("test-session", chain)
 
     await orchestrator.process()
 

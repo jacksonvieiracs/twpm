@@ -30,10 +30,7 @@ def safe_execute(logger: logging.Logger | None = None):
 
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        async def wrapper(self, *args, **kwargs) -> "NodeResult":
-            # fix circular dependency
-            from twpm.core.base import NodeResult
-
+        async def wrapper(self, *args, **kwargs) -> NodeResult:
             node_logger = logger or logging.getLogger(__name__)
             node_id = getattr(self, "key", self.__class__.__name__)
 
