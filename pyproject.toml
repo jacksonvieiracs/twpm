@@ -1,6 +1,6 @@
 [project]
 name = "twpm"
-version = "0.2.2"
+version = "0.2.3"
 description = "A simple workflow builder that takes the complexity out of building dynamic workflows"
 readme = "README.md"
 requires-python = ">=3.9"
