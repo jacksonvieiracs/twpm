@@ -1,6 +1,4 @@
 from collections.abc import Awaitable, Callable
-
-# from dataclasses import dataclass
 from typing import override
 
 from twpm.core.base import ListData, Node, NodeResult

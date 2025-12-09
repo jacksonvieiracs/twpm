@@ -41,3 +41,19 @@ class TestDisplayMessageNode:
         result = await node.execute(data, output)
 
         assert result.message == message
+
+    async def test_uses_message_func_if_provided(self):
+        def message_func(data: ListData) -> str:
+            return f"Hello, {data.get('name')}!"
+
+        node = DisplayMessageNode(key="test_msg", message_func=message_func)
+        data = ListData(data={"name": "John Doe"})
+        output = MockOutput()
+        result = await node.execute(data, output)
+        assert result.message == "Hello, John Doe!"
+
+    async def test_raises_error_if_no_message_or_message_func_is_provided(self):
+        with pytest.raises(
+            ValueError, match="Either message or message_func must be provided."
+        ):
+            DisplayMessageNode(key="test_msg")

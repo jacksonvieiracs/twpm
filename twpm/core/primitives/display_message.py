@@ -1,8 +1,11 @@
+from collections.abc import Callable
 from typing import override
 
 from twpm.core.base import ListData, Node, NodeResult
 from twpm.core.decorators import safe_execute
 from twpm.core.depedencies import Output
+
+SyncPoolOptionsFunc = Callable[[ListData], str]
 
 
 class DisplayMessageNode(Node):
@@ -12,7 +15,12 @@ class DisplayMessageNode(Node):
     This node simply prints a message and continues to the next node.
     """
 
-    def __init__(self, message: str, key: str = "display_message"):
+    def __init__(
+        self,
+        key: str,
+        message: str | None = None,
+        message_func: SyncPoolOptionsFunc | None = None,
+    ):
         """
         Initialize a DisplayMessageNode.
 
@@ -21,7 +29,16 @@ class DisplayMessageNode(Node):
             key: Unique key for this node (default: "display_message")
         """
         super().__init__(key)
-        self.message = message
+        self._message_loaded = False
+        self._message_func = message_func
+        self._message = message
+
+        if message is None and message_func is None:
+            raise ValueError("Either message or message_func must be provided.")
+
+        if message is not None:
+            self._message = message
+            self._message_loaded = True
 
     @override
     @safe_execute()
@@ -35,9 +52,12 @@ class DisplayMessageNode(Node):
         Returns:
             NodeResult indicating success with the displayed message
         """
+        if not self._message_loaded:
+            self._message = self._message_func(data)
+            self._message_loaded = True
 
-        await output.send_text(self.message)
+        await output.send_text(self._message)
 
         return NodeResult(
-            success=True, data={}, message=self.message, is_awaiting_input=False
+            success=True, data={}, message=self._message, is_awaiting_input=False
         )
