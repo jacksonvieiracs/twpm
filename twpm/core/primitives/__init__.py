@@ -7,6 +7,7 @@ from twpm.core.primitives.progress import ProgressNode
 from twpm.core.primitives.question import QuestionNode
 from twpm.core.primitives.quiz import QuizNode, QuizSummaryNode
 from twpm.core.primitives.summary import SummaryNode
+from twpm.core.primitives.switch import SwitchNode
 from twpm.core.primitives.task import TaskNode
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "SummaryNode",
     "TaskNode",
     "ConditionalNode",
+    "SwitchNode",
 ]

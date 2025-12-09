@@ -73,12 +73,10 @@ class TestConditionalNode:
         cond_node = ConditionalNode()
         cond_node.set_condition(data_condition, true_node, false_node)
 
-        # Test with matching value
         data_match = ListData(data={"check_value": "expected"})
         _ = await cond_node.execute(data_match)
         assert cond_node.next == true_node
 
-        # Test with non-matching value
         cond_node2 = ConditionalNode()
         cond_node2.set_condition(data_condition, true_node, false_node)
         data_no_match = ListData(data={"check_value": "other"})
@@ -90,7 +88,6 @@ class TestConditionalNode:
         cond_node = ConditionalNode()
         data = ListData(data={})
 
-        # Decorator catches the ValueError and returns failed result
         result = await cond_node.execute(data)
 
         assert result.success is False
@@ -186,12 +183,10 @@ class TestConditionalNode:
         cond_node = ConditionalNode()
         cond_node.set_condition(complex_condition, true_node, false_node)
 
-        # Test true case
         data_true = ListData(data={"a": "10", "b": "5"})
         _ = await cond_node.execute(data_true)
         assert cond_node.next == true_node
 
-        # Test false case
         cond_node2 = ConditionalNode()
         cond_node2.set_condition(complex_condition, true_node, false_node)
         data_false = ListData(data={"a": "3", "b": "8"})
@@ -237,7 +232,6 @@ class TestConditionalNode:
 
         data = ListData(data={})
 
-        # Should not raise - decorator catches exception and returns failed result
         result = await cond_node.execute(data)
 
         assert result.success is False
